@@ -69,22 +69,26 @@ count(); // 4
 
 // Inside the function called counterFactory
 // return two functions that implement up/down counter.
-// The first function is called inc, this function is responsible for incrementing the value once
+// The first function is called inc, this function is responsible for incrementing the value one
 // The second function is called dec, this function is responsible for decrementing the value by one
 // You will need to use the module pattern to achieve this.
 
-function counterFactory(value) {
-
+function counterFactory(value){
   // Code here.
-
+  var count = value;
+  var inc = function(){
+    return ++count;
+  };
+  var dec = function(){
+    return --count;
+  };
   return {
+    inc: inc,
+    dec: dec
   }
 }
 
-
 counter = counterFactory(10);
-
-
 
 
 //////////////////PROBLEM 5////////////////////
@@ -96,22 +100,22 @@ counter = counterFactory(10);
 
     var welcomeText = 'You\'re doing awesome, keep it up ';
 
-    // code message function here.
+    var message = function(){
+      return welcomeText + firstname + " " + lastname + ".";
+    };
 
-
-    //Uncommment this to return the value of your invoked message function
-
-    //return message()
+    // uncommment this to return the value of your invoked message function
+    return message();
   }
 
-  motivation('Billy', 'Bob'); // 'Your doing awesome keep it up Billy Bob
+  motivation('Billy', 'Bob'); // You're doing awesome, keep it up Billy Bob.
 
 
 
 //////////////////PROBLEM 6////////////////////
 
 // Inside the return create a publicMethod property that is a function that invokes privateMethod. After you create the privateMethod
-// Invoke it by calling module.publicMethod(); outside the module scope
+// invoke it by calling module.publicMethod() outside the module scope.
 
   var module = (function() {
     var person = {
@@ -127,14 +131,12 @@ counter = counterFactory(10);
     // Anything that is being returned is made public and can be invoked from outside our lexical scope
 
     return {
-      // Code here.
+      publicMethod: privateMethod
     };
 
   })();
 
-//Uncomment this after you create your public method
-//   module.publicMethod();
-
+module.publicMethod();
 
 
 //////////////////PROBLEM 7////////////////////
