@@ -144,27 +144,31 @@ module.publicMethod();
 // So that it logs ( 0 then 1 then 2 then 3, etc). Run this code in your console to see what the output is.
 
 
-function timeOutCounter() {
-  for (var i = 0; i <= 5; i++) {
-    setTimeout(function() {
+function timeOutCounter(){
+  for (let i = 0; i <= 5; i++){
+    setTimeout(function(){
       console.log(i);
     }, i * 1000)
   }
 
-  function newScope(i) {
-    console.log(i)
-  }
+  /*function newScope(i){
+    console.log(i);
+  }*/
 }
+
 timeOutCounter();
-  // To make this code work you will need to create a new scope for every iteration.
-
-
-
+// To make this code work you will need to create a new scope for every iteration.
 
 
 //////////////////PROBLEM 8////////////////////
 
 var funcArray = [];
+funcArray.push(function(){ return 0; });
+funcArray.push(function(){ return 1; });
+funcArray.push(function(){ return 2; });
+funcArray.push(function(){ return 3; });
+funcArray.push(function(){ return 4; });
+funcArray.push(function(){ return 5; });
 
 /*
   Make the following code work
