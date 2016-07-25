@@ -10,20 +10,15 @@ var outer = function(){
 
 // Above you're given a function that returns another function which has a closure over the name variable.
 // Invoke outer saving the return value into another variable called 'inner'.
-
 var inner = outer();
-
-//Once you do that, invoke inner.
-
 inner();
 
 
 //////////////////PROBLEM 2////////////////////
 
-
 var callFriend = function(){
   var friend = 'Jake';
-  function callF(number){
+  var callF = function(number){
     return 'Calling ' + friend + ' at ' + number;
   }
   return callF;
@@ -32,7 +27,6 @@ var callFriend = function(){
 
 // Above you're given a callFriend function that returns another function.
 // Create a makeCall function that when invoked logs  'Calling Jake at 435-215-9248' in your console.
-
 var makeCall = function(){
   var callF = callFriend();
   console.log(callF('435-215-9248'));
@@ -40,8 +34,6 @@ var makeCall = function(){
 
 
 //////////////////PROBLEM 3////////////////////
-
-
 
 /*
   Write a function called makeCounter that makes the following code work properly.
@@ -54,14 +46,11 @@ var makeCounter = function(){
   };
 };
 
-
-//Uncomment this once you make your function
 var count = makeCounter();
 count(); // 1
 count(); // 2
 count(); // 3
 count(); // 4
-
 
 
 //////////////////PROBLEM 4////////////////////
@@ -74,17 +63,13 @@ count(); // 4
 // You will need to use the module pattern to achieve this.
 
 function counterFactory(value){
-  // Code here.
-  var count = value;
-  var inc = function(){
-    return ++count;
-  };
-  var dec = function(){
-    return --count;
-  };
   return {
-    inc: inc,
-    dec: dec
+    inc: function(){
+      return ++value;
+    },
+    dec: function(){
+      return --value;
+    }
   }
 }
 
@@ -93,23 +78,17 @@ counter = counterFactory(10);
 
 //////////////////PROBLEM 5////////////////////
 
-
 // Inside the motivation function create another function called message that will return 'You're doing awesome, keep it up firstname lastname.'
 
-  function motivation(firstname, lastname){
-
+  var motivation = function(firstname, lastname){
     var welcomeText = 'You\'re doing awesome, keep it up ';
-
     var message = function(){
       return welcomeText + firstname + " " + lastname + ".";
     };
-
-    // uncommment this to return the value of your invoked message function
     return message();
   }
 
   motivation('Billy', 'Bob'); // You're doing awesome, keep it up Billy Bob.
-
 
 
 //////////////////PROBLEM 6////////////////////
@@ -128,10 +107,10 @@ counter = counterFactory(10);
       return "Hi, I'm " + person.name + ", age " + person.age + " from " + person.location;
     };
 
-    // Anything that is being returned is made public and can be invoked from outside our lexical scope
-
     return {
-      publicMethod: privateMethod
+      publicMethod: function(){
+        return privateMethod();
+      }
     };
 
   })();
@@ -143,21 +122,15 @@ module.publicMethod();
 // Here we have a for loop that will iterate as long as i is less than or equal to 5. What we need to do is console.log(i)
 // So that it logs ( 0 then 1 then 2 then 3, etc). Run this code in your console to see what the output is.
 
-
 function timeOutCounter(){
   for (let i = 0; i <= 5; i++){
     setTimeout(function(){
       console.log(i);
     }, i * 1000)
   }
-
-  /*function newScope(i){
-    console.log(i);
-  }*/
 }
 
 timeOutCounter();
-// To make this code work you will need to create a new scope for every iteration.
 
 
 //////////////////PROBLEM 8////////////////////
